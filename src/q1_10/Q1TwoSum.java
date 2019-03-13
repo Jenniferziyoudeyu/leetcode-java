@@ -13,10 +13,35 @@ return [0, 1].
 
  */
 
+import java.util.Arrays;
+import java.util.*;
+
 public class Q1TwoSum {
+    public int[] twoSum(int[] nums, int target) {
+        if (nums == null) return new int[2];
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[2];
+
+    }
+
+    public int[] twoSum2(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) return new int[]{map.get(target - nums[i]), i};
+            map.put(nums[i], i);
+        }
+        return new int[2];
+    }
+
     public int[] q1twoSum(int[] array, int target) {
         int i,j;
-        for (i = 0; i < array.length; i ++) {
+        for (i = 0; i < array.length; i++) {
             for (j = i + 1; j < array.length; j++) {
                 if (array[i] + array[j] == target) {
                     return new int[]{i,j};
@@ -26,17 +51,17 @@ public class Q1TwoSum {
         return new int[]{};
     }
 
-
-    public int[] q1twoSum2(int[] array, int target) {
-        int left = 0, right = array.length - 1;
-        while (left < right) {
-            if (array[left] + array[right] == target) return new int[] {left,right};
-            else if (array[left] + array[right] > target) right--;
-            else left++;
-        }
-        return new int[2];
-
-    }
+//    public int[] q1twoSum3(int[] array, int target) {
+//        Arrays.sort(array);
+//        int left = 0, right = array.length - 1;
+//        while (left < right) {
+//            if (array[left] + array[right] == target) return new int[] {left,right};
+//            else if (array[left] + array[right] > target) right--;
+//            else left++;
+//        }
+//        return new int[2];
+//
+//    }
 }
 
 /*
