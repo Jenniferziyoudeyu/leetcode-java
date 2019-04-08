@@ -1,15 +1,20 @@
 package q11_20;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Q26_RemoveDuplicatesFromSortedArray {
     public int removeDuplicates(int[] nums) {
-        if ( nums == null || nums.length == 0) return 0;
+        //nums == null不写的话，for loop会崩溃 null pointer exception
+        if (nums == null) return 0;
         List<Integer> numList = new ArrayList<>();
+        Set<Integer> numSet = new HashSet<>();
         for (int i : nums) {
-            if (!numList.contains(i)) {
+            if (!numSet.contains(i)) {
                 numList.add(i);
+                numSet.add(i);
             }
         }
         for (int i = 0; i < numList.size(); i++) {
@@ -17,6 +22,18 @@ public class Q26_RemoveDuplicatesFromSortedArray {
         }
 
         return numList.size();
+    }
+
+    public int removeDuplicates3(int[] nums) {
+        if (nums.length == 0) return 0;
+        int slow = 0;
+        for (int fast = 0; fast < nums.length; fast++) {
+            if (nums[fast] != nums[slow]) {
+                //++slow 是当前slow的下一位变成和fast一样的值
+                nums[++slow] = nums[fast];
+            }
+        }
+        return slow + 1;
     }
 
     //test
@@ -33,14 +50,5 @@ public class Q26_RemoveDuplicatesFromSortedArray {
     new array length is: 3
      */
 
-    public int removeDuplicates2(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
-        int count = 1;
-        for (int i : nums) {
-            if (i != nums[count]) count++;
-            nums[count] = i;
-        }
-        return count;
-    }
 
 }
