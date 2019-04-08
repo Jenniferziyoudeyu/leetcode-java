@@ -7,6 +7,8 @@ public class Q20_ValidParentheses {
         if (s.length() == 0) return true;
         if(s.length() % 2 != 0) return false;
         int size = s.length();
+
+        //注意 i < size - 1 不然会越界
         for (int i = 0; i < size - 1; i++) {
             if (removable(s.charAt(i), s.charAt(i + 1))) {
                 s = s.substring(0, i) + s.substring(i + 2);
